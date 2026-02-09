@@ -1,0 +1,321 @@
+Timestamp,Email Address,Name:,Date:,  1. Tasks Completed Today  ,  2. Time Spent on Tasks  
+09-09-2025 20:50,harika.reddy@timestone.com,Harika,09-09-2025,Sample Task,10mins
+09-10-2025 17:09,akhilesh.tiwari@dataplatr.com,Akhilesh Tiwari,10-09-2025,Testing and validation with RAG - Status : In-progress,8
+09-10-2025 18:43,siva.narayanan@dataplatr.com,Sivanarayanan,10-09-2025,Prepare Databricks certification and Learn Python.,Certification - 4hrs & Python - 4hrs
+09-10-2025 19:06,harihara.sudhan@dataplatr.com,Hariharasudhan,10-09-2025,"Works in Databricks Reporting side :
+  1.Leadership Navigator - SMS
+  2.Leadership Navigator - Teammate Breakdown
+  3.Reporting Hub - Que Social Media
+",Around 7 hrs
+09-10-2025 19:11,vignesh.boominathan@dataplatr.com,Vignesh B,10-09-2025,"1.Tested the models for incremental logics in common data pipeline , on sunrun project.
+2.prepared document for the above testing.",6
+09-10-2025 19:18,salian.shriya@dataplatr.com,Shriya Salian,10-Sep-25,"Working on Databricks Marketplace:
+1.Prepared the data lineage by analyzing the final tables built using Data form code along with their underlying source tables.
+2.Identified the primary keys for the source tables, documented the findings, and initiated the creation of the golden layers.
+3.Collaborated on AR content writing. 
+4.Created a new catalog (prod_uc) in Databricks, added two new schema under it, and listed the tables to be cloned from dev_uc to prod_uc.",8 hrs
+09-10-2025 19:27,gopinath.paramasivan@dataplatr.com,GOPINATH P,Sep-10-2025,"1. CX Replication and data fix and mockup data preparation. (5)
+2. Mockup data preparation for EdwBI tables for Looker conversation analytics exploration. (3)",8
+09-10-2025 20:36,rohith.manivel@dataplatr.com,Rohith Manivel,10-09-2025,"Monitored all production jobs, captured the incremental counts, and sent an update to the onsite team.
+
+Loaded three tables from EBS to Snowflake for testing purposes.
+
+Worked on the SGL Forward Bridge taskflow and completed half of the work.
+
+Collaborated with Abhi on the ACH failure ticket in Informatica.
+",8 hours
+09-10-2025 20:38,ratnadeep.burman@dataplatr.com,Ratna Burman,10-Sep-25,"Sigma tag artcile reviewed, Sigma Data model Artcile reviewed, Databricks AP Ageing Listing completed, Databricks Contact Center reports reviewed, Google Marketplace Form Submisson prep",7
+09-10-2025 21:24,kavyashree.dinesh@dataplatr.com,Kavyashree Dinesh,10-09-2025,Dataplex Documentation for AI POC work and Content writing for Databricks market and python learning,Around 8hours
+09-10-2025 21:26,murali.mohan@dataplatr.com,M Murali Mohan,10-09-2025,"Worked on
+1.  TN Startup RFP 
+2. Documentation and PPT for Google Market Place Listing
+3. Looker LLM Conversational Analytics  - AR",Around 7 hours
+09-10-2025 22:16,manoj.kumar@dataplatr.com,Manojkumar,10-Sep-25,"1.Worked with Sagar and Bharath for Marketing Analytics - reviewed and discussed about the website KPIs 
+2.Worked with Vignesh on implementing the incremental logic for the CDP Models - Analyzed the script for two of the CDP Models
+3.Worked with Keerthana on the Salesforce Accelerator - added the field list for the Salesforce tables and analyzed the script for the project detail and the relationship between the SF Objects
+4.Worked with Deeksha on fixing the csv file issue - When csv file was loaded into SNF ,there were errors because of the csv format ,fixed this issue ",8 hours
+09-10-2025 22:29,deepak.papney@dataplatr.com,Deepak,10-09-2025,preparing for certification  and learning  and  practicing python using AI ,8hours
+09-10-2025 23:27,abhinandan.sanoor@dataplatr.com,Abhinandan,10-09-2025,"1. Worked on sunrun Tickets
+2. Identified some publicly exposed applications deployed in GCP and took necessary actions to prevent public access over the internet.
+3. Tested taking Snapshots of Cloud Composer so we can delete it and later restore it from the Snapshot without losing its configuration and data.",9
+09-11-2025 09:01,yash.jha@dataplatr.com,Yash Jha,11-09-2025,"Project Work
+Agent Interaction Flow 
+Research and Documentation of Dataplex",7 hours
+09-11-2025 09:39,lava.reddy@dataplatr.com,Lava kumar Reddy,10-09-2025,"1. Adding Explore link and images for AP LLM Questions
+2. Working on Leadership Navigator Dashboard in Databricks 
+3. Working on Feedback for simga 
+4. Helping others on Looker and Databricks ( Bhargavi, Diyanshi)",8
+09-11-2025 10:19,keerthana.anbalagan@dataplatr.com,Keerthana,10-09-2025,"1. Documented fields and description for objects like Task, Project, product, customer_journey.
+2. Analyzed the relationship between Leads, Opportunities, and Service Contracts.",6
+09-11-2025 18:37,suparsav.singh@dataplatr.com,Suparsav,11-09-2025,"Finishing on call details for databricks, 
+Google next ai videos related task documenting each section
+Sunrun",7-8hr
+09-11-2025 18:57,diyanshi.jain@dataplatr.com,Diyanshi Jain,11-Sep,PPT work and worked on creating a Databricks dashboard.,8
+09-11-2025 18:59,keerthana.anbalagan@dataplatr.com,Keerthana,11-09-2025,Identified Primary and foreign keys for salesforce objects and documented it,6
+09-11-2025 19:21,salian.shriya@dataplatr.com,Shriya Salian,11-Sep-25,"1. Completed the Cloning of all tables from edw and edwbi schema from dev_uc to prod_uc catalog.
+2. Verified the presence of any code related to dimension tables transformations from ods to edw.
+3. Prepared the golden layer tables for the Call_Details_Hub dashboard and updated the underlying dimension tables by remapping them from edw to ods.
+4. Working on the user manual for the AR module listing.",8 hrs
+09-11-2025 19:55,swarna.manjari@dataplatr.com,Swarnamanjari,11-09-2025,Prompt integration with the wrapper functions.,4 hours
+09-11-2025 20:02,bhargavi.menati@dataplatr.com,Bhargavi,11-09-2025,"Today I reviewed all four dashboards with Mohida and implemented her requested changes. Gopi updated the backend for Spanish calls; we connected and validated them. I’m exploring a row-limit toggle so users can enter a number (e.g., 5) and the table will show only that many rows.",still working on  the spanish call changes
+09-11-2025 20:06,kavyashree.dinesh@dataplatr.com,Kavyashree ,11-09-2025,Learning Python course and work on Databricks marketing ,6hours
+09-11-2025 20:12,rohith.manivel@dataplatr.com,Rohith Manivel,11-09-2025,"1.Monitored production jobs and debugged failures.
+
+2.Completed the SGL Incremental taskflow and successfully loaded the data.
+
+3.Loaded a large volume of data in chunks and validated the results.
+
+4. Collaborated with Abhi on the ACH Failure ticket.",8
+09-11-2025 20:26,deepak.papney@dataplatr.com,Deepak,11-09-2025,"quiz ,tutorials ,documentation ,practice ",8hours
+09-11-2025 20:33,vignesh.boominathan@dataplatr.com,Vignesh B,11-09-2025,"1.Testing for incremental logic for models on CDP (sunrun project)
+2.Analysis the ticket SNF-9235",8
+09-11-2025 20:34,pooja.papney@dataplatr.com,POOJA PAPNEY,10-09-2025,"ELT Automation PoC : Metadata Enrichment code development 
+LD AI Automation: Overseeing the transformation logic development and unblocking the team with strategies.
+TN MSME Proposal: Worked with Shubham to finalize the technical content for the proposal.
+",8
+09-11-2025 20:40,pooja.papney@dataplatr.com,POOJA PAPNEY,11-09-2025,"ELT Automation PoC: Completed Metadata Enricher, In review
+LD Automation PoC: Worked on integrating the code development done by the team so far and created a plan on further steps.
+Daily Work Report analysis: Created a plan for the team, gave the initial steps.
+Market Research on AI Practices",8
+09-11-2025 20:40,siva.narayanan@dataplatr.com,Sivanarayanan ,11-09-2025,"Databricks certification preparation, Python fundamentals and Sql revisions.",1.Databricks certification preparation - 3 hrs  2.Python fundamentals - 3 hrs  3.Sql revisions - 2 hrs
+09-11-2025 20:56,deeksha.salian@dataplatr.com,Deeksha D Salian,11-09-2025,Sunrun Project,8
+09-11-2025 21:31,abhinandan.sanoor@dataplatr.com,Abhinandan,11-09-2025,"1. Worked on sunrun tickets
+2. Cleaned up known unused GCS buckets",8
+09-11-2025 22:56,gopinath.paramasivan@dataplatr.com,GOPINATH P,Sep-10-2025,"1. CX Replication and data fix part for voice AI dashboard 
+2. Worked on creating mockup data for Looker conversation analytics exploration",9
+09-11-2025 23:22,manoj.kumar@dataplatr.com,Manojkumar, 11-SEP-2025," 1.Worked with Bharath, Sagar and Afaf on Marketing Analytics - discussed and analyzed on the website KPIs 
+ 2.Worked with vignesh on Incremental logic of CDP Models - documented yesterday's findings and reviewed with Vyshnavi, worked on Vyshnavi's feedback
+ 3.Worked with Keerthana on the salesforce accelerator - Analyzed the foreign Keys added by Keerthana and the Event_DT Script
+ 4.Worked with Vyshnavi on a Sunrun ticket - SGL Reverse Bridge Mapping Issue ( SNF-9491 ) , analyzed and found the root cause for this issue , updated the ticket , spent most of the time in this task",8 hours
+09-11-2025 23:48,yash.jha@dataplatr.com,Yash Jha,11-09-2025,"Sunrun Project Task
+Prompt Engineering
+Analysis on Daily Work Status Report
+Demo Call",9
+09-12-2025 09:39,harihara.sudhan@dataplatr.com,Hariharasudhan,11-09-2025,"1.Validate WFM data in Databricks
+2.Created some custom calculation for dashboards
+3.works with Diyanshi and Lava on WFM side reports
+4.Loads data into Databricks
+",8 hrs
+09-12-2025 17:53,ratnadeep.burman@dataplatr.com,Ratna Burman,11-Sep-25,"MSME RFP corrections in some conetnt, Image creation, Google Marketplace Prepation",7
+09-12-2025 17:55,ratnadeep.burman@dataplatr.com,Ratna Burman,12-Sep-25,"Google marketplace form Completed, Databricks CC reports review complted, Looker Conv Analytics feedback taking from Chandra and Prabu",7
+09-12-2025 18:41,suparsav.singh@dataplatr.com,Suparsav,12-09-2025,"Completed call details for databricks
+started Leadership Navigator  databricks
+Google next videos analysis & documentation
+DEV side informatica job explore for Sunrun",8hr 
+09-12-2025 19:20,bhargavi.menati@dataplatr.com,Bhargavi,12-09-2025,"I explored a row-limit parameter so users can specify how many rows (e.g., 5) a table shows. It’s implemented but not behaving correctly yet. I also added drilldowns and validated the Spanish calls with Gopi.",still working on the row limit tasks
+09-12-2025 19:21,salian.shriya@dataplatr.com,Shriya Salian,12-Sep-25,"1.Completed and reviewed the development of three golden layer tables for the Call_Details_Hub dashboard.
+2.Completed the AR Module User Manual listing.
+3.Initiated the analysis of golden layer tables for the Leadership Navigator dashboards.",7 hrs
+09-12-2025 19:28,diyanshi.jain@dataplatr.com,Diyanshi Jain,12-09-2025,Databricks wfm dashboard.,7
+09-12-2025 19:37,rohith.manivel@dataplatr.com,Rohith Manivel,12-09-2025,"1.Monitored all production jobs and debugged errors.
+
+2.Executed the SGL Incremental Taskflow and validated the data.
+
+3.Backtracked 10 models and shared the details with Manoj.
+
+4.Loaded CSV files (src_bi_gsheets.ach_notification_support) into a table and migrated them to Dev and Prod for Abhi’s ticket.",8
+09-12-2025 19:52,deepak.papney@dataplatr.com,Deepak,12-09-2025,"certification preparation ,documentation ,quiz ,lab",8hours
+09-12-2025 19:59,kavyashree.dinesh@dataplatr.com,Kavyashree,12-09-2025,Analysis on daily work report,around 6 hours
+09-12-2025 20:32,yash.jha@dataplatr.com,Yash Jha,12-09-2025,"Sunrun Tickets
+Daily work status POC
+LLM Research
+Procurement AI future research for documentation",9
+09-12-2025 21:17,murali.mohan@dataplatr.com,M Murali Mohan,12-09-2025,"Worked on
+1. Google Market Place Listing of GL Accelerator
+2. Looker Conversational Analytics - AR Module",Around 5 hours
+09-12-2025 21:59,keerthana.anbalagan@dataplatr.com,Keerthana,12-09-2025,Loaded data for L0 tables in Big Query,6
+9/15/2025 11:37:31,manoj.kumar@dataplatr.com,Manojkumar,12-Sep-25," 1.Worked with Bharath, Sagar and Afaf on Marketing Analytics - discussed and analyzed on the website KPIs 
+ 2.Worked with vignesh on Incremental logic of CDP Models - analyzed the data for one model,worked on the testing of the incremental logic
+ 3.Worked with Keerthana on the salesforce accelerator - Downloaded the sample data from Sunrun BQ Environment and worked with Keerthana to upload the same to Datapltr BQ Environment
+ 4.Worked with Vyshnavi on the data format issue - for a date field , when the results are downloaded form SNF , the format was not proper worked with vyshanvi to fix this issue",8 hours
+9/15/2025 17:25:50,suparsav.singh@dataplatr.com,Suparsav,15-09-2025,"KT to Keerthana databricks
+Google Next use case
+Started on Leadership workcase for databricks
+Google AI leader certification prep",7-8 Hr
+9/15/2025 19:23:31,salian.shriya@dataplatr.com,Shriya Salian,15-Sep-25,"1.Finalized the AR Module User Manual listing after making the required changes in notebook.
+2.Cloned tables from dev_uc to prod_uc in Databricks and updated records in Procurement-SupplierSites in BigQuery, both as per Lava’s request.
+3.Initiated work on the Leadership Dashboard tables.",7 hrs
+9/15/2025 19:27:48,kavyashree.dinesh@dataplatr.com,Kavyashree,15-09-2025,"Analysis on daily work status report
+Exploring research on Context center databricks ",7hours
+9/15/2025 20:30:50,diyanshi.jain@dataplatr.com,Diyanshi Jain ,15-09-2025,Worked on Databricks data loading and reporting.,8
+9/15/2025 21:13:22,manoj.kumar@dataplatr.com,Manojkumar,15-Sep-25," 1.Worked with vignesh on Incremental logic of two CDP Models - worked on the testing of the incremental logic of two models and shared with Vyshnavi for review
+ 2.Worked with Keerthana on the salesforce accelerator - Keerthana worked on creating the logic for Service_Contract_Event_DT  and Customer_Journey Tables in Datapltr BQ ,helped her on this and connected with Sahil and supersav to get a KT on the databricks implementation of silver,bronze and golden layer scripts
+ 3.Worked with Rohith on job monitoring list - worked on creating an internal documentation on the jobs that needs to be monitored ",8 hours
+9/15/2025 21:38:59,bhargavi.menati@dataplatr.com,Bhargavi,15-09-2025,row limit i have implemented on dashboard,7 hours
+9/16/2025 7:53:03,siva.narayanan@dataplatr.com,Sivanarayanan,15-09-2025,"Certification,Python and Sql","Certification-3,Python-3 and Sql-2"
+9/16/2025 7:53:35,vignesh.boominathan@dataplatr.com,Vignesh B,15-09-2025,Check the incremental logic of CDP objects and prepared a document of that. ,8
+9/16/2025 7:58:17,gopinath.paramasivan@dataplatr.com,Gopinath P,Sep-15-2025,"1. Creating dummy data set for Looker conversation analytics exploration.(3)
+2. worked with Murali related to AR data quality issue fixes (2)",5
+9/16/2025 9:19:27,harihara.sudhan@dataplatr.com,Hariharasudhan,15-09-2025,"1.Submitted Two AR reports 
+2.Created inventory for HR reports
+3.Loaded data for the HR reports",8 hrs
+9/16/2025 9:41:28,yash.jha@dataplatr.com,Yash Jha,15-09-2025,"Sunrun Tickets
+Research on procurement Use Cases
+ Looking for new use cases in Daily Task Reporter",8
+9/16/2025 10:31:20,rohith.manivel@dataplatr.com,Rohith Manivel,15-09-2025,"1.Monitored all production jobs and debugged production issues.
+
+2.Worked on creating a taskflow for the Fusion Forward Bridge project cost actuals.
+
+3.Connected with Abhi regarding the ACH failure ticket.
+
+4.Triggered all XXSRI_SUBS jobs (11 models) in the QA environment as per Vyshnavi’s request and validated the data.
+",8
+9/16/2025 11:26:24,abhinandan.sanoor@dataplatr.com,Abhinandan,15-09-2025,"1. Update sunrun Tickets
+2. GCP course (WIP)",8 hours
+9/16/2025 18:23:57,suparsav.singh@dataplatr.com,Suparsav,16-09-2025,"Salesforce for databricks work started
+Google Next use case Documentation
+Google AI leader certification prep",7-8Hr
+9/16/2025 19:25:53,salian.shriya@dataplatr.com,Shriya Salian,16-Sep-25,"1.Working on the Additional changes required in AR module notebook which involves adding golden layer tables 
+2.Drafting the contact center (call details hub) notebook listing.",6 hrs
+9/16/2025 19:33:13,harihara.sudhan@dataplatr.com,Hariharasudhan,16-09-2025,"1.Added logo and changed name for AR reports
+2.Created Two reports in HR 
+3.Completed and submitted all contactcentre report
+4.verified all report whether dev environment is changed to prod or not",Around 8:30 hrs
+9/16/2025 20:24:39,ratnadeep.burman@dataplatr.com,Ratna Burman,16-Sep-25,"Intiated the Databricks NetSuite Reserch work with team, Define roadmap to work on databricks Salesforce side, Databricks AR Published, Databricks Contact Center prep for publish",8
+9/16/2025 20:49:51,kavyashree.dinesh@dataplatr.com,Kavyashree,16-09-2025,"Analysis on daily report status by getting LLM 
+Content creation on CC on Databricks ",7 hours 
+9/16/2025 20:54:08,lava.reddy@dataplatr.com,Lava Kumar ,16-09-2025,"Completed WFM _dashboard,
+
+Started Netsuite Exploration
+",8
+9/16/2025 20:56:58,vignesh.boominathan@dataplatr.com,vignseh B,16-09-2025,checking incremental logic for models in Common Data Pipeline and Prepare document for that.,8
+9/16/2025 20:59:46,gopinath.paramasivan@dataplatr.com,Gopinath P,Sep-16-2025,Worked on POC for Data Model Design – Netsuite Accounts Payable (5),5
+9/16/2025 21:12:03,diyanshi.jain@dataplatr.com,Diyanshi Jain ,16-09-2025,Worked in Databricks hr dashboards ,8
+9/16/2025 21:14:12,siva.narayanan@dataplatr.com,Sivanarayanan,16--09-2025,"Cretification, Python and Sql","Cretification - 3 hrs, Python - 3 hrs and Sql - 2 hrs"
+9/16/2025 22:19:01,manoj.kumar@dataplatr.com,Manojkumar,16-Sep-25," 1.Worked with vignesh on Incremental logic of one CDP Model - Reviewed the incremental logic for 2 models with Vyshanvi and got the confirmation , and worked with vignesh on the documentaion for those two models and worked on the analysis of one more model
+ 2 Worked with Yash on the Lightmile SAVED_PROJECT L2 model - Analysed and discussed on the strategy for loading the L2 model
+ 3.Worked with Rohith on Informatica Data Integration for SGL Dataset - There was a data discrepancy in the Transaction_amount field in SNF , which reflected in Anaplan , found the root cause and worked with Rohith to fix it and the informatica flow set up was complete , worked with Rohith and Vyshnavi on this ",8 hours
+9/17/2025 8:43:09,yash.jha@dataplatr.com,Yash Jha,16-09-2025,"Sunrun Tickets
+Exploring Future use cases for Procurement
+Refining the Daily Work Status Report",9
+9/17/2025 12:24:13,rohith.manivel@dataplatr.com,Rohith Manivel,16-09-2025,"1.Created a bug-fix ticket for the Fusion Anaplan SGL, worked on it, and moved it to QA.
+
+2.Loaded a new CSV file into a table and copied it to Dev and Prod for Abhi’s ticket.
+
+3.Updated the ETL HR_DAILY_SNAPSHOT_TO_CRM to use the HOME_DEPOT_ELIGIBILITY_FLAG field and provided the details to the onsite team.
+
+4.Connected with Tulsi and Bea regarding the SNF Prod Daily job and provided KT to them.
+
+5.Monitored all production jobs and sent the status email.",8
+9/17/2025 19:29:01,suparsav.singh@dataplatr.com,Suparsav,17-09-2025,"Salesforce for databricks work started
+Google Next dataplatr related usecases in depth review
+Google AI leader certification prep",7-8Hr
+9/17/2025 19:44:54,salian.shriya@dataplatr.com,Shriya Salian,17-Sep-25,"1.Worked on the User Manual listing for the CC notebook, attaching all relevant dashboards along with detailed user descriptions. 
+2.Connected with Sahil about the Call_Details_Hub CC notebook for some additional changes and continued working on it.",7 hrs
+9/17/2025 20:18:59,harihara.sudhan@dataplatr.com,Hariharasudhan,17-09-2025,"Completed Two reports in Databricks 
+1.Talent Acquisition Overview
+2.Talent Acquisition Dashboard - Open Position",8 and half hours
+9/17/2025 20:48:14,diyanshi.jain@dataplatr.com,Diyanshi Jain,17-09-2025,Worked in Databricks dashboard ,8
+9/17/2025 20:57:49,kavyashree.dinesh@dataplatr.com,Kavyashree,17-09-2025,"Leveraging a LLM to review and analyze daily work reports
+Exploring Netsuite 
+Content creation for CC in databricks",7hours
+9/17/2025 21:23:09,deepak.papney@dataplatr.com,Deepak,17-09-2025,certification preparation and practice ,8hour
+9/17/2025 22:23:58,deeksha.salian@dataplatr.com,Deeksha Salian,17-09-2025,"Sunrun Project work
+Google next 25 documentation",8 hours
+9/17/2025 22:24:57,keerthana.anbalagan@dataplatr.com,Keerthana,17-09-2025,"Extracted Sample data from Big Query for the Customer Journey query and Uploaded them into Databricks , built L0 Layer(Bronze) and L1 Layer(Silver)",8
+9/17/2025 22:26:57,gopinath.paramasivan@dataplatr.com,Gopinath,Sep-17-2025,"1. Working on creating data models from Netsuite Source Data , Bronze layer tables uploaded from NetSuite CSVs in Databricks catelog .Silver and Gold layer transformations in progress. (8)",8
+9/17/2025 22:45:51,vignesh.boominathan@dataplatr.com,vignesh B,17-09-2025,"1.check incremental logic for models in CDP 
+2.worked on ticket SNF_9271",8
+9/17/2025 22:49:21,manoj.kumar@dataplatr.com,Manojkumar,17-Sep-25," 1.Worked with Bharath, Sagar and Afaf on Marketing Analytics - discussed on the website and analytics KPIs, where we were unable to find the data and get a confirmation from Afaf on those KPIs 
+ 2.Worked with vignesh on Incremental logic of one CDP Model - analysed the incremental logic for the aggregate model
+ 3.Worked with Yash and Vyshnavi on the Lightmile SAVED_PROJECT L2 model - Analysed and found the root cause for the  failure of L2 SAVED_PROJECT model and documented the analysis and proposed the fix
+ 4.Worked with Keerthana on the salesforce accelerator - Reviewd the existing sample data retrival logic with Prabu , based on his feedback , downloaded new sample data from Sunrun BQ Environment , Ratna suggested to create the SF Models in Databricks as priority  , so worked with Keerthana to create the L0 tables in odsstage schema in demo_uc today",8 hours
+9/17/2025 23:18:05,sagararya.mv@dataplatr.com,Sagar MV,17-09-2025,"Marketing Analytics Project, Exploration of Dataplex, Agentic AI L3 Model",7 hours
+9/17/2025 23:18:40,yash.jha@dataplatr.com,Yash Jha,17-09-2025,"Sunrun tickets
+Daily Work Status Report Planning",8
+9/18/2025 0:01:52,abhinandan.sanoor@dataplatr.com,Abhinandan,17-09-2025,"1. Worked on Sunrun tickets – Production migration
+2. GCP course ( In Progress)",8 hrs
+9/18/2025 10:00:20,bhargavi.menati@dataplatr.com,Bhargavi,17-09-2025,Yesterday I worked on the Call Center architecture slides and replicated the Snowflake architecture in PowerPoint. I also explored the Salesforce tables in Databricks. Today I’ll work on the reporting side.,8
+9/18/2025 11:32:35,rohith.manivel@dataplatr.com,Rohith Manivel,17-09-2025,"1.Monitored all production jobs and debugged any issues encountered.
+
+2.Executed the SGL taskflow individually, validated the data, and resolved the issue.
+
+3.Collaborated with Abhi to create a new ETL for the Production ACH Failure job and migrated it to production.",8
+9/18/2025 18:39:07,suparsav.singh@dataplatr.com,Suparsav,18-09-2025,"Salesfroce Databricks work
+Google Ai leader certif prep
+",7-8Hr
+9/18/2025 19:24:13,salian.shriya@dataplatr.com,Shriya Salian,18-Sep-25,"1.Connected with sahil on CC notebook error, resolved and completed the development for the call_detail hub_notebook.
+2.Working on the AR module notebook.",6 hrs
+9/18/2025 19:43:37,diyanshi.jain@dataplatr.com,Diyanshi Jain,18-09-2025,Databricks dashboard,7
+9/18/2025 19:47:52,harihara.sudhan@dataplatr.com,Hariharasudhan,18-09-2025,"1.Completed HR reports 
+2. Works with Gopi in Data Modeling
+3.Built two Map related tile in Databricks",8 hrs
+9/18/2025 20:51:12,kavyashree.dinesh@dataplatr.com,Kavyashree,18-09-2025,"CC work on Databricks 
+Exploring Netsuite ",6hours 
+9/18/2025 21:18:06,gopinath.paramasivan@dataplatr.com,Gopinath P,Sep-18-2025,Worked on creating Datamodel's from Netsuite Dataset (8),8
+9/18/2025 21:33:26,bhargavi.menati@dataplatr.com,bhargavi,18-09-2025,"Today I connected with Keerthana and Ratna regarding the Salesforce report in Databricks. The data is available in the Bronze layer, and I’m exploring the data. I also added the CCAI Insights module to the Contact Center architecture slide, and I’m learning Python basics in Google Colab.",8
+9/18/2025 21:46:45,vignesh.boominathan@dataplatr.com,Vignesh B,18-09-2025,"worked and prepared documentation for sunrun tickets SNF-9270 ,SNF-9271 and SNF-9582.",8
+9/18/2025 22:02:45,manoj.kumar@dataplatr.com,Manojkumar,18-Sep-25," 1.Worked with Bharath, Sagar and Afaf on Marketing Analytics - discussed on finalising the calculations for the KPIs and discussed on creating the looker dashboards
+ 2.Worked with vignesh on CDP Models - Moved the CDP models created under the common_Pipelines Schema to rpt schema and created the aggregate tables in Prospect_Contact_Billing based on Kiran's feedback
+ 3.Worked with Yash on the Lightmile SAVED_PROJECT L2 model - Worked with Yash to create the Temp table in DEV and process the last 6 months data
+ 4.Worked with Keerthana on the salesforce accelerator - Worked with Ratna, Sahil , Keerthan and finalised the process of creating the models in ods,odsstage and edwbi layer in databricks ",8 hours
+9/19/2025 0:15:09,abhinandan.sanoor@dataplatr.com,Abhinandan,19-09-2025,"1. Worked Sunrun tickets - Monitored production jobs
+2. Analyzed FOC API python script",8 hrs
+9/19/2025 9:40:03,yash.jha@dataplatr.com,Yash Jha,18-09-2025,Sunrun tickets(DBT Job),8
+9/19/2025 12:26:03,rohith.manivel@dataplatr.com,Rohith manivel,18-09-2025,"1.Created the Project Cost Actuals Full Load taskflow; development is complete, and validation is pending.
+
+2.Raised a bug fix ticket to remove the freshness test from one of the Salesforce models, made the necessary changes, and moved the ticket to QA.
+
+3.Monitored all production jobs and sent the daily status email.
+
+4.Attended a KT session on Python basics and took notes.",8
+9/19/2025 17:30:52,sagararya.mv@dataplatr.com,Sagar MV,18-09-2025,"Explored and obtained knowledge on the agentic AI approach for L1 and L2 code generation.
+Attended Python Basics and started with AI/ML Training. 
+Coordinated on the marketing analytics project and obtained the KPIs for Konnector and Website KPIs.
+Coordinated on the L3 data model and prepared the data for the same.
+Analysed various learning paths related to GCP - Generative AI Leader path.",8
+9/19/2025 19:05:13,salian.shriya@dataplatr.com,Shriya Salian,19-Sep-25,"1.Connected with Kavya on finalizing the user manual listing for the CC Call Details Hub Listing.
+2.Completed the AR module notebook, incorporating the required additional changes.",7 hrs
+9/19/2025 20:24:52,keerthana.anbalagan@dataplatr.com,Keerthana,19-09-2025,"Migrated table from Bronze to Silver. After that, Customer_journey query is built in Golden layer.",6
+9/19/2025 20:26:59,kavyashree.dinesh@dataplatr.com,Kavyashree,19-09-2025,"Connected with shriya for user manual update for the CC in the databricks
+connected with gopi for the netsuite working process",6hours 
+9/19/2025 21:58:31,manoj.kumar@dataplatr.com,Manojkumar,19-Sep-25,"
+ 1.Worked with Bharath, Ratna and Afaf on Marketing Analytics - discussed on creating the looker dashboards with Ratna , Ratna suggested Murali will do the initial setups and guide Bharath, discussed the progress on the Follows Message Testing with Afaf
+ 2.Worked with vignesh on CDP Models - Added the aggregate tables to the prospect_contact_Billing,updated the testing doc and moved it to QA  
+ 3.Worked with Yash on the Lightmile SAVED_PROJECT L2 model - Worked with Yash to validate the last 6 months data loaded in the DEV Temp table , identified the gaps and worked with him to fix those, spent most of the time here
+ 4.Worked with Keerthana on the salesforce accelerator - Keerthan created the tables on the ods layer , reviewed the Customer_Journey script with Keerthana and gave her some feedback on the same",8 hours
+9/19/2025 23:09:04,sagararya.mv@dataplatr.com,Sagar MV,19-09-2025,"Explored and raised feedbacks on the agentic AI approach for L1, L2 and L3 code generation.
+Coordinated on the marketing analytics project.
+Prepared GL Recon and Vendor Spend Analysis L3 Models and shared with AI Team.
+Analyzed learning paths related to GCP - Generative AI Leader path.",8
+9/22/2025 18:17:42,yash.jha@dataplatr.com,Yash Jha,22-09-2025,"Sunrun Ticket
+Daily Task Reporter additional scopes
+Looker CC documentation planning",8
+9/22/2025 18:47:52,suparsav.singh@dataplatr.com,Suparsav,22-09-2025,"Salesforce work
+Sunrun work
+Google next usecase documentation  
+Gen AI leader prep",8Hr
+9/22/2025 19:06:29,salian.shriya@dataplatr.com,Shriya Salian,22-Sep-25,"1.Connected with Kavya regarding the CC Leadership Navigator content for listing, and had a walkthrough covering the overview of the tables used along with some generic information about them.
+2.Started analyzing the code in Dataform for all edw source tables, with a focus on the TLAssist-AgentDailyIOR table for the Leadership Navigator Dashboard, and began working on the same.",7 hrs
+9/22/2025 20:21:23,kavyashree.dinesh@dataplatr.com,Kavyashree,22-09-2025,"Connected with Shriya regarding the CC Leadership Navigator in Databricks.
+Worked on Netsuite content writing and user manual in Databricks.",7hours
+9/22/2025 20:48:45,deeksha.salian@dataplatr.com,Deeksha Salian,22-09-2025,Sunrun project,8 hours
+9/22/2025 21:42:09,manoj.kumar@dataplatr.com,Manojkumar,22-Sep-25," 1.Worked with Sagar on Marketing Analytics - Updated the Calculations and Screenshots for the metrics in the Word Doc, reviewed it with sagar and shared across the Marketing Team for review 
+ 2.Worked with Yash on the Lightmile SAVED_PROJECT L2 model - Worked with Yash to validate the incremental logic after the manual data migration to prod 
+ 3.Worked with Keerthana on the salesforce accelerator - reviewed the databricks tables and the customer journey table Keerthana created 
+ 4.Worked with Rohith and Vyshnavi - Initial setup of the Integration job from SNF to Anaplan was done , but the full load was failing looked into this issue with Rohith and Vyshnavi ",8 hours
+9/22/2025 22:45:30,rohith.manivel@dataplatr.com,Rohith Manivel,22-09-2025,"1.Monitored all production jobs and sent daily status emails. 
+2. Executed the full load for project cost actuals and validated the data.",8
+9/23/2025 10:49:31,sagararya.mv@dataplatr.com,Sagar MV,22-09-2025,"1. Marketing Analytics project -> Finalized the KPI list and is ready for the review. 
+2. Worked on exploring vector databases and exploration of vertex feature store is in progress.
+3. Training on Gen AI - Completed Week 1. (External).
+
+",7
+9/23/2025 18:34:24,suparsav.singh@dataplatr.com,Suparsav,23-09-2025,"Databricks marketing team video (This took more time explore & creating)
+Sunrun work for failed runs",8-9Hr
+9/23/2025 19:09:42,salian.shriya@dataplatr.com,Shriya Salian,23-Sep-25,"1.Worked on Python PPT for the Python training session.
+2.Connected with Gopi and Kavya to discuss about the netsuite notebook.
+3.Started development of the Golden Layer table Edw.TLAssist-CSRLILO for the Leadership Navigator Dashboard.",7 hrs
+9/23/2025 21:47:32,kavyashree.dinesh@dataplatr.com,Kavyashree,23-09-2025,"Connected with ratna regarding Content writing for netsuite in databricks
+Connected with diyanshi and shriya regarding user manual for netsuite in databricks",8hours
+9/23/2025 21:56:24,manoj.kumar@dataplatr.com,Manojkumar,22-Sep-25," 1.Worked with Bharath,Sagar on Marketing Analytics - discussed about the next steps, created the L1,L2 Schemas and the created the dataform code for the L1,L2 layer tables
+ 2.Worked with Keerthana on the salesforce accelerator - discussed about the Event Table and the initial script developed  for it
+ 3.Worked with Rohith and Vyshnavi - Project Costs Integration job from SNF to Anaplan full load wass failing , worked with Rohith and Vyshnavi , debugged the issue and loaded the full load data",8 hours
+9/23/2025 22:22:34,ratnadeep.burman@dataplatr.com,Ratna Burman,23-Sep-25,"Google Marketplace Questions work, Netsuite reports review with Ankit, Slaesforce report guidence given, Marketing reports Project setup in Looker",10
+9/23/2025 22:40:50,deeksha.salian@dataplatr.com,Deeksha Salian,23-09-2025,Sunrun Project,8 hours
+9/24/2025 9:46:55,vignesh.boominathan@dataplatr.com,Vignesh B,22-09-2025,check for incremental logics for prospect contact billing objects on CDP ,8
+9/24/2025 9:49:00,vignesh.boominathan@dataplatr.com,vignesh B,23-09-2025,"1. check for incremental logic on CDP objects
+2.worked on ticket SNF-9607",8
+9/24/2025 9:49:22,harihara.sudhan@dataplatr.com,Hariharasudhan ,23-09-2025,"1. Learned Databricks ETL method With Gopi
+2.Learned Architecture of Databricks
+3.Worked on Visualistation Part in Databricks",8 hrs

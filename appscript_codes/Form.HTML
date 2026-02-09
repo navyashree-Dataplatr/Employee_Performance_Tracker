@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Status Report</title>
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.6;
+    }
+    
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      background: white;
+      padding: 24px 32px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid #2563eb;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .company-logo {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      line-height: 0;
+    }
+
+    .company-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .company-logo img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-text {
+      flex: 1;
+    }
+
+    .page-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .page-header p {
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: #e2e8f0;
+      width: 100%;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .content {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
+    label {
+      display: block;
+      color: #334155;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .required {
+      color: #dc2626;
+      margin-left: 2px;
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 6px;
+      font-weight: 400;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      color: #1e293b;
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.5;
+    }
+
+    .task-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .task-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .task-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .task-badge {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 16px;
+    }
+
+    .icon-btn:hover {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .icon-btn.delete:hover {
+      border-color: #dc2626;
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .add-task-btn {
+      width: 100%;
+      padding: 14px;
+      background: white;
+      color: #2563eb;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .add-task-btn:hover {
+      background: #f8fafc;
+      border-color: #2563eb;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: #0c4a6e;
+      font-weight: 500;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .summary-value {
+      font-size: 24px;
+      color: #0c4a6e;
+      font-weight: 700;
+    }
+
+    .summary-unit {
+      font-size: 13px;
+      color: #075985;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      padding-top: 32px;
+      border-top: 2px solid #f1f5f9;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-primary:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary:disabled::before {
+      display: none;
+    }
+
+    .submit-icon {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover .submit-icon {
+      transform: translateX(4px);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+      }
+    }
+
+    .btn-primary:not(:disabled):focus {
+      animation: pulse 1.5s infinite;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .alert {
+      padding: 14px 16px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      display: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .alert.success {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .alert.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 80px 40px;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+    }
+
+    .success-title {
+      font-size: 24px;
+      color: #1e293b;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .success-message {
+      font-size: 15px;
+      color: #64748b;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      border: 3px solid #e2e8f0;
+      border-top: 3px solid #2563eb;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .small-input {
+      max-width: 150px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+
+      .content {
+        padding: 24px;
+      }
+
+      .page-header {
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+
+      .company-logo {
+        height: 48px;
+      }
+
+      .company-logo img {
+        height: 48px;
+      }
+
+      .page-header h1 {
+        font-size: 20px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- KEEP YOUR ORIGINAL HTML STRUCTURE -->
+  <div class="page-header">
+    <a href="https://yourcompany.com" class="company-logo" title="Company Home">
+      <img src="https://www.google.com/u/0/ac/images/logo.gif?uid=102248287900093422159&service=google_gsuite" alt="Company Logo">
+    </a>
+    <div class="header-text">
+      <h1>Daily Status Report</h1>
+      <p>Document your daily activities and accomplishments</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <div class="content">
+      <div id="alert" class="alert"></div>
+
+      <div id="formContent">
+        <form id="statusForm">
+          <!-- Section 1: Employee Information -->
+          <div class="section">
+            <div class="section-header">
+              <div class="section-number">1</div>
+              <div>
+                <div class="section-title">Employee Information</div>
+                <div class="section-subtitle">Basic details for identification</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" id="employeeName" required>
+              </div>
+
+              <div class="form-group">
+                <label>Email Address <span class="required">*</span></label>
+                <input type="email" id="email" required>
+              </div>
+
+              <div class="form-group">
+                <label>Date <span class="required">*</span></label>
+                <input type="date" id="reportDate" required>
+                <div class="field-hint">You can only submit reports for today or yesterday</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Tasks & Activities -->
+          <div class="section">
+            <div class="section-header">
+              <div class="section-number">2</div>
+              <div>
+                <div class="section-title">Tasks & Activities</div>
+                <div class="section-subtitle">Detail the work completed today</div>
+              </div>
+            </div>
+
+            <div id="tasksContainer"></div>
+            <button type="button" class="add-task-btn" onclick="addTask()">
+              <span>+</span> Add Task
+            </button>
+          </div>
+
+          <!-- Section 3: Summary -->
+          <div class="section">
+            <div class="section-header">
+              <div class="section-number">3</div>
+              <div>
+                <div class="section-title">Daily Summary</div>
+                <div class="section-subtitle">Overview of your work today</div>
+              </div>
+            </div>
+
+            <div class="summary-grid">
+              <div class="summary-card">
+                <div class="summary-label">Total Hours</div>
+                <div class="summary-value" id="totalHours">0.0<span class="summary-unit">hrs</span></div>
+              </div>
+
+              <div class="summary-card">
+                <div class="summary-label">Tasks Completed</div>
+                <div class="summary-value" id="taskCount">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-bar">
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+              ↻ Reset Form
+            </button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span style="position: relative; z-index: 1;">Submit Report</span>
+              <span class="submit-icon" style="position: relative; z-index: 1;">→</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <p style="color: #64748b;">Submitting your report...</p>
+        </div>
+      </div>
+
+      <div id="successScreen" class="success-screen">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Report Submitted Successfully</div>
+        <div class="success-message">
+          Your daily status report has been recorded and will be reviewed by your manager.<br>
+          Thank you for keeping us updated on your progress.
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <button class="btn btn-primary" onclick="submitAnother()">
+            <span style="position: relative; z-index: 1;">Submit Another Report</span>
+            <span class="submit-icon" style="position: relative; z-index: 1;">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEEP YOUR ORIGINAL JAVASCRIPT EXACTLY AS IT WAS -->
+  <script>
+    let taskCount = 0;
+
+    window.onload = function() {
+      const today = new Date();
+      const dateInput = document.getElementById('reportDate');
+      
+      dateInput.valueAsDate = today;
+      dateInput.max = today.toISOString().split('T')[0];
+      
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      dateInput.min = yesterday.toISOString().split('T')[0];
+      
+      addTask();
+      updateProgress();
+    };
+
+    function addTask() {
+      taskCount++;
+      const container = document.getElementById('tasksContainer');
+      
+      const taskCard = document.createElement('div');
+      taskCard.className = 'task-card';
+      taskCard.id = 'task-' + taskCount;
+      
+      taskCard.innerHTML = `
+        <div class="task-card-header">
+          <div class="task-badge">Task ${taskCount}</div>
+          <div class="task-actions">
+            ${taskCount > 1 ? '<button type="button" class="icon-btn delete" onclick="removeTask(' + taskCount + ')" title="Remove task">×</button>' : ''}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category <span class="required">*</span></label>
+            <select class="task-category" required onchange="handleCategoryChange(this)">
+              <option value="">Select category</option>
+              <option value="Development">Development</option>
+              <option value="Code Review">Code Review</option>
+              <option value="Testing/QA">Testing/QA</option>
+              <option value="Bug Fixing">Bug Fixing</option>
+              <option value="Documentation">Documentation</option>
+              <option value="Meeting">Meeting</option>
+              <option value="Planning">Planning</option>
+              <option value="Research">Research</option>
+              <option value="Deployment">Deployment</option>
+              <option value="Support">Support</option>
+              <option value="Training">Training</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="task-category-custom" style="display: none; margin-top: 8px;" placeholder="Enter custom category name">
+          </div>
+
+          <div class="form-group">
+            <label>Hours Spent <span class="required">*</span></label>
+            <input type="number" class="task-hours small-input" required step="0.5" min="0.5" max="24" placeholder="2.5" onchange="updateSummary()">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Task Description <span class="required">*</span></label>
+          <textarea class="task-description" required placeholder="Describe what you worked on, what was accomplished, and any relevant details..."></textarea>
+        </div>
+      `;
+      
+      container.appendChild(taskCard);
+      updateSummary();
+      updateProgress();
+    }
+
+    function removeTask(taskId) {
+      const taskCard = document.getElementById('task-' + taskId);
+      if (taskCard) {
+        taskCard.remove();
+        updateSummary();
+        updateProgress();
+      }
+    }
+
+    function updateSummary() {
+      const taskCards = document.querySelectorAll('.task-card');
+      const hourInputs = document.querySelectorAll('.task-hours');
+      let total = 0;
+      let completedTasks = 0;
+      
+      hourInputs.forEach(input => {
+        const value = parseFloat(input.value) || 0;
+        total += value;
+        if (value > 0) {
+          completedTasks++;
+        }
+      });
+      
+      document.getElementById('totalHours').innerHTML = total.toFixed(1) + '<span class="summary-unit">hrs</span>';
+      document.getElementById('taskCount').textContent = completedTasks;
+    }
+
+    function updateProgress() {
+      const form = document.getElementById('statusForm');
+      const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+      let filled = 0;
+      
+      inputs.forEach(input => {
+        if (input.value.trim() !== '') filled++;
+      });
+      
+      const progress = (filled / inputs.length) * 100;
+      document.getElementById('progressBar').style.width = progress + '%';
+    }
+
+    document.addEventListener('input', updateProgress);
+    document.addEventListener('change', updateProgress);
+
+    function handleCategoryChange(selectElement) {
+      const taskCard = selectElement.closest('.task-card');
+      const customInput = taskCard.querySelector('.task-category-custom');
+      
+      if (selectElement.value === 'Other') {
+        customInput.style.display = 'block';
+        customInput.required = true;
+        customInput.focus();
+      } else {
+        customInput.style.display = 'none';
+        customInput.required = false;
+        customInput.value = '';
+      }
+      updateProgress();
+    }
+
+    function resetForm() {
+      if (confirm('Are you sure you want to reset the form? All entered data will be lost.')) {
+        document.getElementById('statusForm').reset();
+        document.getElementById('tasksContainer').innerHTML = '';
+        taskCount = 0;
+        addTask();
+        updateSummary();
+        updateProgress();
+      }
+    }
+
+    function submitAnother() {
+      // Hide success screen
+      document.getElementById('successScreen').style.display = 'none';
+      
+      // Show form content
+      document.getElementById('formContent').style.display = 'block';
+      
+      // Show the form itself
+      document.getElementById('statusForm').style.display = 'block';
+      
+      // Hide loading
+      document.getElementById('loading').style.display = 'none';
+      
+      // Clear the form without confirmation
+      document.getElementById('statusForm').reset();
+      document.getElementById('tasksContainer').innerHTML = '';
+      taskCount = 0;
+      
+      // Set today's date
+      const today = new Date();
+      const dateInput = document.getElementById('reportDate');
+      dateInput.valueAsDate = today;
+      dateInput.max = today.toISOString().split('T')[0];
+      
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      dateInput.min = yesterday.toISOString().split('T')[0];
+      
+      // Add one fresh task
+      addTask();
+      updateSummary();
+      updateProgress();
+      
+      // Re-enable submit button
+      document.getElementById('submitBtn').disabled = false;
+      
+      // Hide any alerts
+      document.getElementById('alert').style.display = 'none';
+    }
+
+    document.getElementById('statusForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const loading = document.getElementById('loading');
+      const alertDiv = document.getElementById('alert');
+      const formContent = document.getElementById('formContent');
+      const successScreen = document.getElementById('successScreen');
+      
+      const employeeName = document.getElementById('employeeName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const reportDate = document.getElementById('reportDate').value;
+      
+      const selectedDate = new Date(reportDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      selectedDate.setHours(0, 0, 0, 0);
+      
+      if (selectedDate < yesterday || selectedDate > today) {
+        showAlert('You can only submit reports for today or yesterday. Please select a valid date.', 'error');
+        return;
+      }
+      
+      const tasks = [];
+      const taskCards = document.querySelectorAll('.task-card');
+      
+      taskCards.forEach(card => {
+        const selectElement = card.querySelector('.task-category');
+        const customInput = card.querySelector('.task-category-custom');
+        let category = selectElement.value;
+        
+        if (category === 'Other' && customInput.value.trim()) {
+          category = customInput.value.trim();
+        }
+        
+        const description = card.querySelector('.task-description').value.trim();
+        const hours = parseFloat(card.querySelector('.task-hours').value) || 0;
+        
+        if (category && description && hours > 0) {
+          tasks.push({ category, description, hours });
+        }
+      });
+      
+      if (tasks.length === 0) {
+        showAlert('Please complete at least one task with all required fields', 'error');
+        return;
+      }
+      
+      const totalHours = tasks.reduce((sum, task) => sum + task.hours, 0);
+      
+      const formData = {
+        employeeName,
+        email,
+        reportDate,
+        tasks,
+        totalHours
+      };
+      
+      submitBtn.disabled = true;
+      document.getElementById('statusForm').style.display = 'none';
+      loading.style.display = 'block';
+      alertDiv.style.display = 'none';
+      
+      // Actually submit to Google Apps Script
+      google.script.run
+        .withSuccessHandler(function(response) {
+          submitBtn.disabled = false;
+          loading.style.display = 'none';
+          
+          if (response.success) {
+            formContent.style.display = 'none';
+            successScreen.style.display = 'block';
+          } else {
+            document.getElementById('statusForm').style.display = 'block';
+            showAlert('Error: ' + (response.error || 'Failed to submit report'), 'error');
+          }
+        })
+        .withFailureHandler(function(error) {
+          submitBtn.disabled = false;
+          loading.style.display = 'none';
+          document.getElementById('statusForm').style.display = 'block';
+          showAlert('Error submitting form: ' + error.message, 'error');
+        })
+        .saveToSheet(formData);
+    });
+
+    function showAlert(text, type) {
+      const alertDiv = document.getElementById('alert');
+      alertDiv.textContent = text;
+      alertDiv.className = 'alert ' + type;
+      alertDiv.style.display = 'block';
+      
+      if (type === 'success') {
+        setTimeout(() => {
+          alertDiv.style.display = 'none';
+        }, 5000);
+      }
+    }
+  </script>
+</body>
+</html>
