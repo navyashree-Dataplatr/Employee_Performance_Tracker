@@ -106,12 +106,8 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                         <div>
                             <div className="flex items-center gap-3">
                                 <h2 className="text-4xl font-black text-slate-900 tracking-tighter">Enterprise <span className="text-indigo-600">Invoicing</span></h2>
-                                <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-lg border border-indigo-100 shadow-sm animate-pulse uppercase tracking-widest">Live Engine</span>
                             </div>
-                            <p className="text-xs text-slate-400 font-extrabold uppercase tracking-[0.3em] mt-2 flex items-center gap-2">
-                                <span className="w-4 h-[2px] bg-indigo-200 rounded-full"></span>
-                                SOW Compliant Billing Portfolio • Lyell Project
-                            </p>
+
                         </div>
                     </div>
                     <button
@@ -136,7 +132,7 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                 <option value="" disabled>Select Reporting Window</option>
                                 {periods.map((p) => (
                                     <option key={`${p.year}-${p.month}`} value={`${p.year}-${p.month}`}>
-                                        {p.period.toUpperCase()} PERFORMANCE
+                                        {p.period.toUpperCase()}
                                     </option>
                                 ))}
                             </select>
@@ -163,7 +159,7 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                 className="px-10 py-4.5 bg-white border border-slate-200 hover:border-indigo-400 text-slate-700 hover:text-indigo-600 rounded-3xl text-[15px] font-black transition-all flex items-center gap-4 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 active:scale-95 group/down"
                             >
                                 {isExporting ? <Loader2 className="w-5 h-5 animate-spin text-indigo-600" /> : <Download className="w-5 h-5 group-hover/down:translate-y-1 transition-transform duration-500" />}
-                                Export Official Ledger
+                                Export Invoice
                             </button>
                         )}
                     </div>
@@ -247,7 +243,7 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                     <p className="text-[15px] font-bold text-slate-500 mt-1 max-w-3xl leading-relaxed">
                                         {invoice.has_sow_violations
                                             ? `Critical Alert: Performance data for this period indicates a variance of ${invoice.total_extra_hours.toFixed(2)} hours exceeding the agreed SOW framework. Internal audit required before client submission.`
-                                            : 'Ledger Verified: All personnel activity and labor categories successfully passed the automated SOW compliance validation logic.'}
+                                            : 'Ledger Verified: All work  categories successfully passed the automated SOW compliance validation logic.'}
                                     </p>
                                 </div>
                             </div>
@@ -312,7 +308,7 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                             <div className="p-3 bg-white rounded-2xl shadow-sm border border-slate-100">
                                                 <Users className="w-5 h-5 text-indigo-600" />
                                             </div>
-                                            <h3 className="font-black text-xs uppercase tracking-[0.3em] text-slate-400">Personnel Performance Audit</h3>
+                                            <h3 className="font-black text-xs uppercase tracking-[0.3em] text-slate-400"> Performance Audit</h3>
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <span className="text-[11px] font-black uppercase tracking-widest text-indigo-500 bg-indigo-50 px-4 py-2 rounded-xl border border-indigo-100">{invoice.employee_breakdown.length} Records Analyzed</span>
@@ -322,8 +318,8 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                         <table className="w-full text-left">
                                             <thead>
                                                 <tr className="text-slate-400 text-[11px] uppercase font-black tracking-[0.2em] border-b border-slate-100/60">
-                                                    <th className="px-10 py-6">Consultant Identity</th>
-                                                    <th className="px-10 py-6 text-center">Duty Cycles</th>
+                                                    <th className="px-10 py-6">Employee Name</th>
+                                                    <th className="px-10 py-6 text-center">Work Category</th>
                                                     <th className="px-10 py-6 text-center">Gross Sum</th>
                                                     <th className="px-10 py-6 text-center text-emerald-600">Net Billable</th>
                                                     <th className="px-10 py-6 text-center">Variance Delta</th>
@@ -386,13 +382,6 @@ const InvoiceModal: React.FC<InvoiceModalProps> = ({ isOpen, onClose, apiBaseUrl
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="text-center space-y-4 max-w-xl">
-                                <p className="text-sm font-black text-slate-400 uppercase tracking-[0.5em] opacity-60">Audit Documentation Vault</p>
-                                <h3 className="text-2xl font-black text-slate-800 tracking-tight">System Ready for Performance Analysis</h3>
-                                <p className="text-[15px] font-bold text-slate-400 leading-relaxed">
-                                    To generate a certified SOW compliance ledger, please select a target sequence from the control console above.
-                                </p>
                             </div>
                         </div>
                     )}

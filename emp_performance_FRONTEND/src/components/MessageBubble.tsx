@@ -1,5 +1,5 @@
 // src/components/MessageBubble.tsx
-import { Bot, User } from 'lucide-react';
+import { Bot, User, Download, ChevronRight } from 'lucide-react';
 import { Message, ChartData } from "../types";
 import DynamicChart from "./DynamicChart";
 import { useMemo } from 'react';
@@ -282,6 +282,36 @@ function MessageBubble({ message }: MessageBubbleProps) {
                 minute: '2-digit'
               })}
             </div>
+
+            {/* Invoice Download Action */}
+            {isBot && message.invoice_metadata && (
+              <div className="mt-4 w-full animate-entrance">
+                <button
+                  onClick={() => {
+                    const { year, month } = message.invoice_metadata!;
+                    const downloadUrl = `http://localhost:5000/api/lyell/invoice/monthly/${year}/${month}/pdf`;
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.setAttribute('download', `Lyell_Invoice_${year}-${month}.pdf`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="flex items-center justify-between w-full px-6 py-4 bg-indigo-50 border border-indigo-100 rounded-2xl hover:bg-indigo-100 hover:border-indigo-200 transition-all group/pdf shadow-sm"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-2.5 bg-white rounded-xl shadow-sm text-indigo-600 group-hover/pdf:scale-110 transition-transform">
+                      <Download className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-indigo-900 tracking-tight">Export Official PDF Ledger</p>
+                      <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mt-0.5">Lyell Project • {message.invoice_metadata.year}-{String(message.invoice_metadata.month).padStart(2, '0')}</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-indigo-300 group-hover/pdf:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            )}
 
             {/* Chart section - now uses extracted chart data */}
             {isBot && extractedChartData && (

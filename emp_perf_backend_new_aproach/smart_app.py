@@ -1,5 +1,3 @@
-
-
 # smart_app.py 
 import traceback
 from flask import Flask, jsonify, request
@@ -16,15 +14,17 @@ from individual_analyzer import IndividualAnalyzer
 from lyell_individual_analyzer import LyellIndividualAnalyzer
 from chart_generator import ChartGenerator
 from invoice_generator import LyellInvoiceGenerator
-from pdf_generator import InvoicePDFGenerator
+from pdf_generator import InvoicePDFGenerator 
 from flask import send_file
-
-
+import threading
+import time
+from email_utils import EmailService
+from dotenv import load_dotenv
+# Load environment variables from .env file
+load_dotenv()
 app = Flask(__name__)
 CORS(app)
-
 # ==================== CENTRALIZED DATE RANGE UTILITIES ====================
-
 class DateRangeCalculator:
     """
     Centralized date range calculator to ensure consistency across all queries.
@@ -152,16 +152,11 @@ class DateRangeCalculator:
             end_date = date(year, month + 1, 1) - timedelta(days=1)
         
         return start_date, end_date
-
-
 # Legacy function kept for backward compatibility
 def get_last_month_range(reference_date: date = None):
     """Legacy function - use DateRangeCalculator.get_date_range('last_month') instead"""
     return DateRangeCalculator.get_date_range('last_month', reference_date)
-
-
 # ==================== LYELL EXTRA HOURS CONSTANTS ====================
-
 class LyellBillingRules:
     """
     Centralized billing rules for Lyell project to ensure consistency.
@@ -255,10 +250,7 @@ class LyellBillingRules:
         
         # Cap at max_hours
         return round(min(actual_hours, max_hours), 2)
-
-
 # ==================== API KEY ROTATION MANAGER ====================
-
 class APIKeyManager:
     """Simple API key rotation manager"""
     
@@ -280,22 +272,42 @@ class APIKeyManager:
             next_index = (self.current_index + i + 1) % len(self.api_keys)
             if next_index not in self.failed_keys:
                 self.current_index = next_index
-                print(f"✓ Switched to API key #{self.current_index + 1}")
+                print(f" Switched to API key #{self.current_index + 1}")
                 return True
         
         # All keys failed
-        print("✗ All API keys exhausted!")
+        print(" All API keys exhausted!")
         return False
     
     def reset_failed_keys(self):
         """Reset failed keys (call this periodically, e.g., daily)"""
         self.failed_keys.clear()
-        print("✓ API key rotation reset")
-
+        print(" API key rotation reset")
 # ==================== CONFIGURATION ====================
-
 # API keys here
 API_KEYS = [
+
+
+
+    'AIzaSyCxVg8IPUhmYoLmL7ug9ra3TU1n7WzmIg4',
+    'AIzaSyDVVjBgO5F79zbQ2apIJkcRDQlnAEEeln0',
+    'AIzaSyCfslc0lPFwBWU_hIMGkYIBFsDOEtNLk9g',
+    'AIzaSyAQrQI1sO91QnJZBXB6_p8urvkXHLjkxa8',
+    'AIzaSyDMcDpW-neTFRB1HHH19yT9H6xL_8fZuKA',
+    'AIzaSyCmFGG62zGWnywHJRa5Lzu6QsztqQGD6K8',
+    'AIzaSyAq8LaxrSqczJb3_7keqeuGtyut8r-RgFA',
+    'AIzaSyD2ZsnTvu8d9_e1VS3m-Y-25O7m4_C90RQ',
+    'AIzaSyDe46QJngYveSbb4tKVgWQP6-q5tpduP20',
+    'AIzaSyDvWYHYidFTpAgbsoOc1swLBK2c3QedHC0',    
+    'AIzaSyDcztmPzvNciYsPvAjQC_VGfpOqZMd3-jI',
+    'AIzaSyCL2U05oQZYnTqqQvym-ZhHAXhxkwv4fsc',
+    'AIzaSyC_mslFjUhAijcit7rIL1uGTIGrvgakkwg',
+    
+
+
+    'AIzaSyDz8SU0sWgD5kQ8UQrQqzprAuaVAzhKF8w',
+
+
     #smd
     'AIzaSyBqfSQpKF2pfq82TGAzNLSEWiOHC2NGpLA',
     'AIzaSyBSqFIzC-Fx-8pS_SBoBjHEjzz-1YTPXfg',
@@ -304,7 +316,6 @@ API_KEYS = [
     'AIzaSyD82tYHQoJwCMiG2vTccqLy9CfT_j3buWo',
     'AIzaSyDl-uy_WHe-hSMOysHsKK1V4kxHOII_idE',
     'AIzaSyCXsOJAFcJ4DKnyOpZKrrh23_e-QpqQe4o',
-
         #kp key
     'AIzaSyAOunvPCSVwxLXVH1mZBPRRy-96ZLnPHDM',
     'AIzaSyBTSYBXz5czmQ_SzDU5qYuhJInF9JuCYJI',
@@ -312,8 +323,6 @@ API_KEYS = [
     'AIzaSyDYMmyH2wm13gH3-wAD09BPHPjj6Wc7A6Q',
     'AIzaSyCJaddqukntXgzlYt7ZPkiN2hmP3U1oKbs',
     'AIzaSyDeE7Iri0e7RBZnODYqotLM1rnvNns6Y-o',
-
-
     #SHRE KEY
     'AIzaSyAd9NCap3Z-BAFYjkXuGYE7zQGhRsjZVCg',
     'AIzaSyB-WeCoamdQNXjjlcSgR9eCYmK0DN1-baY',
@@ -321,20 +330,6 @@ API_KEYS = [
     'AIzaSyD5egr0HlGYakz6OuRrF0SS1F0NqMDOM1A',
     'AIzaSyAs9_GmeK1bskxj8x3UThatEuZ28vtshTY',
     'AIzaSyD_8skah3uY_5oRPwhSARj-2NAZGpZ5SNw',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #ak keys
     'AIzaSyACNVTUpakkTUl6szgl-K9WZpQ_7-OdyOM',
     'AIzaSyAXM6YtnEnJdJf8Velo5itB8hm64gQEvYo',
@@ -354,33 +349,25 @@ API_KEYS = [
     'AIzaSyDqSQVffQ7BoiC6r9d50xT9KtjqgIeVjG0',
     'AIzaSyC1B2fI1WVdUCUzE_OfrFoP8jRWg2jmpwM',
 ]
-
 # Initialize key manager
 key_manager = APIKeyManager(API_KEYS)
-
 # Initialize base components
 print("Initializing Dataplatr Analytics System...")
-
+# Get absolute path for data files
+current_dir = os.path.dirname(os.path.abspath(__file__))
+employees_csv_path = os.path.join(current_dir, 'Dataplatr_employees.csv')
 base = BaseDataProcessor(
-    employees_csv=r'emp_perf_backend_new_aproach\Dataplatr_employees.csv',
+    employees_csv=employees_csv_path,
     google_sheet_url='https://docs.google.com/spreadsheets/d/1ZUhkf7B5dU1-mfQOyTGRetS_GCo9lsqoXeq2KEq2bC4/export?format=csv&gid=1844282638'
 )
-
 # Initialize analyzers
 individual = IndividualAnalyzer(base)
 team = TeamAnalyzer(base, individual)
-
 # NEW: Initialize Lyell Individual Analyzer
 print("Initializing Lyell Individual Analyzer...")
 lyell_individual = LyellIndividualAnalyzer(base)
 lyell_individual.set_individual_analyzer(individual)
 print("Lyell Individual Analyzer initialized!")
-
-# NEW: Initialize Chart Generator
-print("Initializing Chart Generator...")
-chart_generator = ChartGenerator(base)
-print("Chart Generator initialized!")
-
 # NEW: Initialize Invoice Generator
 print("Initializing Lyell Invoice Generator...")
 invoice_generator = LyellInvoiceGenerator(lyell_individual, billing_rate=LyellBillingRules.LYELL_HOURLY_RATE)
@@ -388,17 +375,32 @@ invoice_generator = LyellInvoiceGenerator(lyell_individual, billing_rate=LyellBi
 invoices_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "invoices")
 pdf_generator = InvoicePDFGenerator(output_directory=invoices_dir)
 print(f"Invoice Generator initialized! Invoices will be saved to: {invoices_dir}")
-
+# NEW: Initialize Email Service
+print("Initializing Email Service...")
+# Use environment variables for email configuration
+smtp_server = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
+smtp_port = int(os.environ.get("SMTP_PORT", 587))
+sender_email = os.environ.get("SENDER_EMAIL", "navyashree.poojary@dataplatr.com")
+sender_password = os.environ.get("SENDER_PASSWORD") # Should be an App Password for Gmail
+email_service = EmailService(
+    smtp_server=smtp_server,
+    smtp_port=smtp_port,
+    sender_email=sender_email,
+    sender_password=sender_password
+)
+print(f"Email Service initialized for: {sender_email}")
+if not sender_password:
+    print("⚠ WARNING: No SENDER_PASSWORD provided. Authentication may fail.")
+# Initialize Chart Generator
+print("Initializing Chart Generator...")
+chart_generator = ChartGenerator(base)
+print("Chart Generator initialized!")
 print("System initialized successfully!")
-
 # Initialize LLM with first API key
 genai.configure(api_key=key_manager.get_current_key())
-model = genai.GenerativeModel("gemini-2.5-flash")
-
-print(f"✓ LLM initialized with API key #{key_manager.current_index + 1}")
-
+model = genai.GenerativeModel("gemini-3-flash-preview")
+print(f" LLM initialized with API key #{key_manager.current_index + 1}")
 # ==================== LLM HELPER WITH ROTATION ====================
-
 def call_llm_with_rotation(prompt, max_retries=None):
     """
     Call LLM with automatic API key rotation on quota errors
@@ -423,29 +425,36 @@ def call_llm_with_rotation(prompt, max_retries=None):
         except Exception as e:
             error_msg = str(e).lower()
             
-            # Check if it's a quota/rate limit error
-            if any(keyword in error_msg for keyword in ['quota', 'rate limit', 'resource exhausted', '429', 'resource_exhausted']):
-                print(f"⚠ Quota exceeded on API key #{key_manager.current_index + 1}")
+            # Check for multiple types of failure that should trigger rotation
+            # 1. Quota/Rate limits (429)
+            # 2. Permission/Leaked/Invalid keys (403)
+            # 3. Model overload / Server errors (500/503)
+            is_quota_error = any(keyword in error_msg for keyword in ['quota', 'rate limit', 'resource exhausted', '429', 'resource_exhausted'])
+            is_permission_error = any(keyword in error_msg for keyword in ['permission', '403', 'leaked', 'denied', 'unauthorized', 'invalid_api_key'])
+            is_server_error = any(keyword in error_msg for keyword in ['500', '503', 'overloaded', 'deadline', 'service unavailable'])
+            
+            if is_quota_error or is_permission_error or is_server_error:
+                reason = "Quota exceeded" if is_quota_error else ("API key blocked/invalid" if is_permission_error else "Server overload")
+                print(f"⚠ {reason} on API key #{key_manager.current_index + 1}")
                 
                 # Try to rotate to next key
                 if key_manager.rotate_key():
                     # Reconfigure with new key
                     genai.configure(api_key=key_manager.get_current_key())
-                    model = genai.GenerativeModel("gemini-2.5-flash")
-                    print(f"✓ Retrying with API key #{key_manager.current_index + 1}")
+                    # Use a stable version
+                    model = genai.GenerativeModel("gemini-1.5-flash") 
+                    print(f" Rotating to API key #{key_manager.current_index + 1} and retrying (Attempt {attempt + 1}/{max_retries})...")
                     continue
                 else:
-                    print("✗ All API keys exhausted")
+                    print(" All API keys exhausted or failed")
                     return None
             else:
-                # Non-quota error, don't rotate
-                print(f"✗ LLM error (non-quota): {e}")
+                # Other types of errors (e.g., block reason)
+                print(f" LLM error (unhandled category): {e}")
                 raise e
     
     return None
-
 # ==================== HELPER FUNCTIONS ====================
-
 def classify_intent(query):
     """Lightweight intent classification with key rotation and date awareness"""
     
@@ -636,7 +645,6 @@ def classify_intent(query):
         intent_data["intent"] = "comparison"
     
     return intent_data
-
 def generate_intelligent_response(intent, query):
     """Generate LLM response with guaranteed chart generation"""
     
@@ -861,7 +869,6 @@ def generate_intelligent_response(intent, query):
             {json.dumps(daily_performance, indent=2, default=str)}
             
         
-
             - Employees with violations: {sum(1 for emp in employees if emp.get('total_extra_hours', 0) > 0)}
             """
         else:
@@ -1187,18 +1194,12 @@ def generate_intelligent_response(intent, query):
     # Build the prompt for LLM - STRICTLY ENFORCING CHART GENERATION
     prompt = f"""
     You are a professional HR analytics assistant for Dataplatr. You MUST provide a chart for EVERY response.
-
     CURRENT DATE/TIME: {datetime.now().strftime('%Y-%m-%d %I:%M %p (%A)')}
-
     USER QUERY: {query}
-
     CONTEXT DATA:
     {context}
-
     ==================== MANDATORY SOW RULES FOR LYELL PROJECT ====================
-
     **FOR ALL LYELL-RELATED QUERIES, YOU MUST INCLUDE THIS SECTION:**
-
     SoW for Lyell project is this:
     1. ETL category: Max 4.0 hours per day per employee
        - Hours beyond 4.0 = EXTRA HOURS (unbillable)
@@ -1208,7 +1209,6 @@ def generate_intelligent_response(intent, query):
        
     3. Development, Testing, Architect, Other: NO CAPS
        - Bill ALL hours for these categories
-
     4. Extra hours calculation example:
        - Employee works 6 hours ETL in one day
        - Billable: 4.0 hours
@@ -1216,9 +1216,7 @@ def generate_intelligent_response(intent, query):
        
     5. DataPlatr project: NO CAPS - bill all hours for all categories
     ==============================================================================
-
     **CRITICAL REQUIREMENTS - YOU MUST FOLLOW THESE RULES:**
-
     1. **CHART IS MANDATORY**: You MUST include exactly ONE chart in JSON format
     2. **NO EXCEPTIONS**: Every response must have a chart
     3. **CHART TYPE**: Choose the MOST appropriate chart type based on your analysis:
@@ -1228,7 +1226,6 @@ def generate_intelligent_response(intent, query):
        - Showing trends → line
        - Multi-category comparison → radar
        - Relationships → scatter
-
     4. **CHART CONTENT**: Create the chart based on YOUR analysis of the context data
     5. **USE REAL DATA**: Extract numbers from the context above for your chart
     6. **STRUCTURE YOUR RESPONSE**:
@@ -1236,7 +1233,6 @@ def generate_intelligent_response(intent, query):
        - Provide detailed analysis
        - End with your chart JSON in ```json ... ``` code block
         **IMPROVED CHART TYPE SELECTION RULES - YOU MUST FOLLOW THESE:**
-
     1. **RANKING QUERIES (top/best/worst/ranking)**: Use "horizontalBar"
        - Example: "Show top 5 employees" → horizontalBar
        - Example: "Rank employees by hours" → horizontalBar
@@ -1263,7 +1259,6 @@ def generate_intelligent_response(intent, query):
     
     **CRITICAL**: Analyze the query type and choose the MOST APPROPRIATE chart type.
     **CHART CREATION EXAMPLES:**
-
     EXAMPLE 1 - For employee ranking (query: "show me top performers"):
     ```json
     {{
@@ -1283,7 +1278,6 @@ def generate_intelligent_response(intent, query):
         }}
     }}
     ```
-
     EXAMPLE 2 - For extra hours analysis (query: "show extra hours by employee"):
     ```json
     {{
@@ -1303,7 +1297,6 @@ def generate_intelligent_response(intent, query):
         }}
     }}
     ```
-
     EXAMPLE 3 - For monthly comparison (query: "compare december and january"):
     ```json
     {{
@@ -1328,7 +1321,6 @@ def generate_intelligent_response(intent, query):
         }}
     }}
     ```
-
     EXAMPLE 4 - For category distribution (query: "show category breakdown"):
     ```json
     {{
@@ -1344,17 +1336,13 @@ def generate_intelligent_response(intent, query):
         ]
     }}
     ```
-
     **YOUR TASK:**
-
     1. Analyze the user query: "{query}"
     2. Analyze the context data provided above
     3. Generate a COMPREHENSIVE response with insights
     4. **MANDATORY**: Create ONE appropriate chart based on your analysis
     5. Include the chart as JSON in ```json ... ``` code block at the END
-
     **FAILURE TO PROVIDE A CHART WILL RESULT IN SYSTEM ERROR.**
-
     REMEMBER:
     - Use "horizontalBar" for ranking (top/bottom employees)
     - Use "bar" for comparisons (employee vs employee, month vs month)
@@ -1362,7 +1350,6 @@ def generate_intelligent_response(intent, query):
     - Use "line" for trends over time
     - Use "radar" for multi-dimensional comparison
     - Use "scatter" for relationships
-
     **NOW GENERATE YOUR RESPONSE WITH CHART:**
     """
     
@@ -1405,19 +1392,19 @@ def generate_intelligent_response(intent, query):
                 
                 # Validate required fields
                 if not chart_data.get('chartType'):
-                    print(f"✗ Chart rejected: Missing chartType")
+                    print(f" Chart rejected: Missing chartType")
                     chart_data = None
                 elif chart_data.get('chartType') == 'none':
-                    print(f"✗ Chart rejected: Invalid chart type 'none'")
+                    print(f" Chart rejected: Invalid chart type 'none'")
                     chart_data = None
                 elif not chart_data.get('labels') or not isinstance(chart_data['labels'], list):
-                    print(f"✗ Chart rejected: Missing or invalid labels")
+                    print(f" Chart rejected: Missing or invalid labels")
                     chart_data = None
                 elif not chart_data.get('datasets') or not isinstance(chart_data['datasets'], list):
-                    print(f"✗ Chart rejected: Missing or invalid datasets")
+                    print(f" Chart rejected: Missing or invalid datasets")
                     chart_data = None
                 elif len(chart_data['datasets']) == 0:
-                    print(f"✗ Chart rejected: Empty datasets")
+                    print(f" Chart rejected: Empty datasets")
                     chart_data = None
                 else:
                     # Ensure chartTitle exists
@@ -1444,11 +1431,11 @@ def generate_intelligent_response(intent, query):
                 print(f"Error processing chart: {e}")
                 chart_data = None
         else:
-            print("⚠ No JSON code block found in response")
+            print(" No JSON code block found in response")
         
         # IF NO CHART FOUND OR INVALID, CREATE A FALLBACK CHART BASED ON QUERY
         if not chart_data:
-            print("⚠ No valid chart found in LLM response. Creating intelligent fallback chart...")
+            print(" No valid chart found in LLM response. Creating intelligent fallback chart...")
             
             # Create fallback chart based on query analysis
             chart_data = create_intelligent_fallback_chart(intent, query, context)
@@ -1480,7 +1467,6 @@ def generate_intelligent_response(intent, query):
         }
         error_msg = f"I analyzed the data and generated insights. See chart below for visualization."
         return error_msg, error_chart
-
 def create_intelligent_fallback_chart(intent, query, context):
     """Create an intelligent fallback chart based on query analysis with diverse chart types"""
     
@@ -1646,7 +1632,6 @@ def create_intelligent_fallback_chart(intent, query, context):
     
     print(f"✓ Created {chart_data['chartType']} chart for query: {query}")
     return chart_data
-
         
 @app.route('/employees', methods=['GET'])
 def get_employees():
@@ -1668,7 +1653,6 @@ def get_employees():
             "error": f"Failed to get employees: {str(e)}",
             "employees": []
         }), 500
-
 @app.route('/employee-summary', methods=['GET'])
 def get_employee_summary():
     """Get employee summary statistics"""
@@ -1697,10 +1681,10 @@ def get_employee_summary():
             "submitted_today": 0,
             "not_submitted_today": 0
         }), 500
-
 @app.route('/chat', methods=['POST'])
 def chat():
-    """Main chat endpoint with LLM-generated charts only"""
+    """Main chat endpoint with LLM-generated charts and automated analytics"""
+    global chart_generator, key_manager, model
     try:
         data = request.json
         query = data.get('query', '')
@@ -1730,12 +1714,27 @@ def chat():
             comprehensive_charts = chart_generator._get_empty_chart_data()
         
         # 4. Prepare response
+        invoice_metadata = None
+        if intent["intent"] in ["lyell_compliance", "billing_summary"] and intent["project"] == "lyell":
+            # Extract year and month for PDF export
+            if intent.get("specific_month"):
+                try:
+                    y, m = intent["specific_month"].split('-')
+                    invoice_metadata = {"year": int(y), "month": int(m)}
+                except: pass
+            elif intent.get("timeframe") == "last_month":
+                last_month_date = date.today().replace(day=1) - timedelta(days=1)
+                invoice_metadata = {"year": last_month_date.year, "month": last_month_date.month}
+            else:
+                # Default to current month if no specific month mentioned
+                invoice_metadata = {"year": date.today().year, "month": date.today().month}
         response = {
             "response": response_text,
             "type": intent["intent"],
             "chartData": chart_data,  # LLM-generated chart (legacy)
             "comprehensiveCharts": comprehensive_charts,  # NEW: All available charts
             "intent": intent,
+            "invoice_metadata": invoice_metadata, # Added for UI PDF export
             "api_key_used": key_manager.current_index + 1,
             "lyell_daily_cap": LyellBillingRules.LYELL_DAILY_CAP_PER_EMPLOYEE
         }
@@ -1750,7 +1749,6 @@ def chat():
             "type": "error",
             "chartData": {"chartType": "none"}
         }), 500
-
 @app.route('/employee/<email>', methods=['GET'])
 def get_employee(email):
     """Get detailed metrics for a specific employee"""
@@ -1762,7 +1760,6 @@ def get_employee(email):
             return jsonify({"error": "Employee not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 @app.route('/project-billing/<project_name>', methods=['GET'])
 def get_project_billing(project_name):
     """Get project billing summary"""
@@ -1784,9 +1781,7 @@ def get_project_billing(project_name):
         return jsonify(summary)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 # ============== NEW LYELL ENDPOINTS ==============
-
 @app.route('/lyell/employees', methods=['GET'])
 def get_lyell_employees():
     """Get individual employee performance for Lyell project"""
@@ -1827,7 +1822,6 @@ def get_lyell_employees():
             "error": str(e),
             "individual_performance": []
         }), 500
-
 @app.route('/lyell/daily/<date_str>', methods=['GET'])
 def get_lyell_daily(date_str):
     """Get Lyell performance for a specific date"""
@@ -1842,7 +1836,6 @@ def get_lyell_daily(date_str):
             "error": str(e),
             "message": f"Invalid date format. Use YYYY-MM-DD"
         }), 400
-
 @app.route('/lyell/category/<category>', methods=['GET'])
 def get_lyell_category(category):
     """Get category performance for Lyell"""
@@ -1872,7 +1865,6 @@ def get_lyell_category(category):
             "error": str(e),
             "category": category
         }), 500
-
 @app.route('/lyell/compliance', methods=['GET'])
 def get_lyell_compliance():
     """Get SOW compliance report for Lyell"""
@@ -1901,7 +1893,6 @@ def get_lyell_compliance():
             "error": str(e),
             "compliance_report": {}
         }), 500
-
 @app.route('/lyell/compare', methods=['GET'])
 def get_lyell_compare():
     """Compare two employees on Lyell"""
@@ -1939,7 +1930,6 @@ def get_lyell_compare():
             "error": str(e),
             "comparison": {}
         }), 500
-
 @app.route('/lyell/top-contributors', methods=['GET'])
 def get_lyell_top_contributors():
     """Get top contributors for Lyell"""
@@ -1970,7 +1960,6 @@ def get_lyell_top_contributors():
             "error": str(e),
             "top_contributors": []
         }), 500
-
 @app.route('/lyell/multi-project', methods=['GET'])
 def get_lyell_multi_project():
     """Get employees handling multiple projects including Lyell"""
@@ -1999,7 +1988,6 @@ def get_lyell_multi_project():
             "error": str(e),
             "multi_project_employees": []
         }), 500
-
 @app.route('/lyell/summary', methods=['GET'])
 def get_lyell_summary():
     """Get comprehensive summary for Lyell"""
@@ -2015,9 +2003,7 @@ def get_lyell_summary():
             "error": str(e),
             "summary": {}
         }), 500
-
 # ============== EXISTING FILTER ENDPOINTS ==============
-
 @app.route('/filter-employees', methods=['POST'])
 def filter_employees():
     """
@@ -2098,7 +2084,6 @@ def filter_employees():
             "error": str(e),
             "employees": []
         }), 500
-
 @app.route('/available-filters', methods=['GET'])
 def get_available_filters():
     """
@@ -2142,7 +2127,6 @@ def get_available_filters():
             "date_range": {},
             "lyell_individual_support": True
         }), 500
-
 @app.route('/charts', methods=['GET'])
 def get_charts():
     """Get comprehensive chart data for all available metrics"""
@@ -2164,7 +2148,6 @@ def get_charts():
             "error": str(e),
             "charts": chart_generator._get_empty_chart_data()
         }), 500
-
 @app.route('/api-status', methods=['GET'])
 def get_api_status():
     """Get current API key rotation status"""
@@ -2176,7 +2159,6 @@ def get_api_status():
         "lyell_individual_support": True,
         "lyell_daily_cap": LyellBillingRules.LYELL_DAILY_CAP_PER_EMPLOYEE
     })
-
 @app.route('/reset-api-keys', methods=['POST'])
 def reset_api_keys():
     """Manually reset failed API keys"""
@@ -2186,9 +2168,7 @@ def reset_api_keys():
         "current_key": key_manager.current_index + 1,
         "lyell_individual_support": True
     })
-
 # ==================== INVOICE ENDPOINTS ====================
-
 @app.route('/api/lyell/invoice/list', methods=['GET'])
 def list_lyell_invoices():
     """List all available invoice periods for Lyell project"""
@@ -2204,7 +2184,6 @@ def list_lyell_invoices():
             "success": False,
             "error": str(e)
         }), 500
-
 @app.route('/api/lyell/invoice/monthly/<int:year>/<int:month>', methods=['GET'])
 def get_monthly_invoice(year, month):
     """Generate and return monthly invoice data as JSON"""
@@ -2220,7 +2199,6 @@ def get_monthly_invoice(year, month):
             "success": False,
             "error": str(e)
         }), 500
-
 @app.route('/api/lyell/invoice/monthly/<int:year>/<int:month>/pdf', methods=['GET'])
 def export_invoice_pdf(year, month):
     """Generate and return monthly invoice as PDF file"""
@@ -2247,37 +2225,140 @@ def export_invoice_pdf(year, month):
             "error": str(e)
         }), 500
 
-# ==================== MAIN ====================
 
+
+@app.route('/api/send-test-invoice', methods=['GET'])
+def send_test_invoice():
+    """Trigger a test invoice email for the current month"""
+    try:
+        current_date = date.today()
+        year = current_date.year
+        month = current_date.month
+        
+        # Generate the data
+        invoice_data = invoice_generator.generate_monthly_invoice(year, month)
+        
+        # Generate the PDF
+        filename = f"Test_Lyell_Invoice_{year}-{month:02d}"
+        pdf_path = pdf_generator.generate_invoice_pdf(invoice_data, filename)
+        
+        # Send Email
+        recipient = "navyashree.poojary@dataplatr.com"
+        subject = f"TEST: Monthly Invoice for {invoice_data['month_name']} {year}"
+        body = f"""
+Hello,
+This is an automated test email with the monthly invoice for the Lyell project.
+Period: {invoice_data['period_description']}
+Total Billable: ${invoice_data['total_billable_amount']:,.2f}
+Please find the attached invoice PDF for more details.
+        """
+        
+        success = email_service.send_invoice_email(recipient, subject, body, pdf_path)
+        
+        if success:
+            return jsonify({
+                "success": True,
+                "message": f"Test invoice sent successfully to {recipient}",
+                "invoice_number": invoice_data['invoice_number']
+            })
+        else:
+            return jsonify({
+                "success": False,
+                "error": "Failed to send email. Check console for details."
+            }), 500
+            
+    except Exception as e:
+        print(f"Error in send_test_invoice: {e}")
+        traceback.print_exc()
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+# ==================== AUTOMATED SCHEDULER ====================
+def automated_invoice_scheduler():
+    """Background task to send monthly invoices at the end of each month"""
+    print("✓ Automated Invoice Scheduler started")
+    
+    while True:
+        try:
+            now = datetime.now()
+            today = now.date()
+            
+            # Check if it's the last day of the month
+            # A simple way: tomorrow is the 1st day of a new month
+            tomorrow = today + timedelta(days=1)
+            
+            if tomorrow.day == 1:
+                year = today.year
+                month = today.month
+                
+                # Use a specific filename to check if we already sent it today
+                # This prevents duplicates if the server is restarted on the last day
+                filename = f"Lyell_Invoice_{year}-{month:02d}"
+                pdf_path = os.path.join(invoices_dir, f"{filename}.pdf")
+                
+                # Also check if it's late enough in the day (e.g., after 10 PM)
+                # to ensure all daily work is captured
+                if now.hour >= 22:
+                    # Check if file exists to avoid duplicate sending on the same day
+                    # We could also use a markers file but PDF existence is a good proxy here
+                    # since we delete/regenerate for manual triggers
+                    if not os.path.exists(pdf_path):
+                        print(f"Executing end-of-month invoice automation for {today.strftime('%B %Y')}...")
+                        
+                        # Generate data
+                        invoice_data = invoice_generator.generate_monthly_invoice(year, month)
+                        
+                        # Generate PDF (this creates the file we check for above)
+                        pdf_path = pdf_generator.generate_invoice_pdf(invoice_data, filename)
+                        
+                        recipient = "navyashree.poojary@dataplatr.com"
+                        subject = f"Monthly Invoice: {invoice_data['month_name']} {year}"
+                        body = f"""
+Hello,
+Please find attached the automated monthly invoice for the Lyell project.
+Period: {invoice_data['period_description']}
+Total Hours: {invoice_data['total_hours']:.2f}
+Billable Amount: ${invoice_data['total_billable_amount']:,.2f}
+                        """
+                        
+                        success = email_service.send_invoice_email(recipient, subject, body, pdf_path)
+                        if success:
+                            print(f"✓ Monthly invoice automation complete for {today.strftime('%B %Y')}")
+                        else:
+                            print(f"✗ Failed to send automated invoice for {today.strftime('%B %Y')}")
+                    else:
+                        # Success marker exists, check tomorrow
+                        pass
+            
+            # Sleep for 1 hour before checking again
+            # Checks 24 times a day, triggers once in the 22nd or 23rd hour of the last day
+            time.sleep(3600)
+            
+        except Exception as e:
+            print(f"Error in automated_invoice_scheduler: {e}")
+            traceback.print_exc()
+            time.sleep(3600)
+# ==================== MAIN ====================
 if __name__ == '__main__':
     print("\n" + "="*60)
-    print("Dataplatr Analytics System v3.1 - WITH AUTO CHART GENERATION")
+    print("Dataplatr Analytics System")
     print("="*60)
-    print(f"✓ Employees loaded: {len(base.master_df)}")
-    print(f"✓ Work reports loaded: {len(base.work_df)}")
-    print(f"✓ Date range: {base.min_date} to {base.max_date}")
-    print(f"✓ Active API Key: #{key_manager.current_index + 1}")
-    print(f"✓ Lyell Individual Analyzer: Active with {len(dir(lyell_individual))} methods")
-    print(f"✓ Chart Generator: Active - Auto-generates ALL charts")
-    print(f"✓ Lyell Daily Cap: {LyellBillingRules.LYELL_DAILY_CAP_PER_EMPLOYEE} hours per day per employee")
-    print(f"✓ Centralized Date Calculator: DateRangeCalculator")
-    print(f"✓ SoW Enforcement: Mandatory for all Lyell queries")
-    print(f"✓ Server starting on: http://localhost:5000")
+    print(f" Employees loaded: {len(base.master_df)}")
+    print(f" Work reports loaded: {len(base.work_df)}")
+    print(f" Date range: {base.min_date} to {base.max_date}")
+    print(f" Active API Key: #{key_manager.current_index + 1}")
+    print(f" Lyell Individual Analyzer: Active with {len(dir(lyell_individual))} methods")
+    print(f" Chart Generator: Active - Auto-generates ALL charts")
+    print(f" Lyell Daily Cap: {LyellBillingRules.LYELL_DAILY_CAP_PER_EMPLOYEE} hours per day per employee")
+    print(f" Centralized Date Calculator: DateRangeCalculator")
+    print(f" SoW Enforcement: Mandatory for all Lyell queries")
+    print(f" Automated Scheduler: Running")
+    print(f" Server starting on: http://localhost:5000")
     print("="*60)
-    app.run(debug=True, host='0.0.0.0', port=5000)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    # Start the automated scheduler in a background thread
+    scheduler_thread = threading.Thread(target=automated_invoice_scheduler, daemon=True)
+    scheduler_thread.start()
+    
+    app.run(debug=True, host='0.0.0.0', port=5000, use_reloader=False)

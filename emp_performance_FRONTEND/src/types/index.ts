@@ -37,6 +37,10 @@ export interface Message {
   sender: 'user' | 'bot';
   timestamp: Date;
   chartData?: ChartData;
+  invoice_metadata?: {
+    year: number;
+    month: number;
+  };
 }
 
 export interface ChatResponse {

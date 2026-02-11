@@ -101,7 +101,8 @@ Use the smart search bar above to search employees, apply filters, or ask any qu
         sender: 'bot',
         timestamp: new Date(),
         chartData: data.chartData || { chartType: 'none' },
-        comprehensiveCharts: undefined
+        comprehensiveCharts: data.comprehensiveCharts,
+        invoice_metadata: data.invoice_metadata
       };
 
       setMessages(prev => [...prev, botMessage]);
