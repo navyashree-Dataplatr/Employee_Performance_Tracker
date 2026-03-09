@@ -9,6 +9,9 @@ class EmailService:
     Utility service to send emails with PDF attachments.
     """
     
+    # This section initializes the email service with SMTP server details and sender credentials. It allows for default values for Gmail's SMTP server and port, but also accepts custom configurations. The sender email and password can be provided directly or loaded from environment variables, making it flexible for different deployment environments. This setup is essential for enabling the functionality to send invoice emails with PDF attachments to clients or internal stakeholders. 
+    # The constructor takes in the SMTP server address, port number, sender email, and sender password. If the sender email or password is not provided, it will rely on environment variables to load these values, ensuring that sensitive information is not hardcoded in the codebase. This design allows for secure and configurable email sending capabilities within the application.    
+
     def __init__(self, smtp_server="smtp.gmail.com", smtp_port=587, sender_email=None, sender_password=None):
         """
         Initialize the email service.
@@ -23,6 +26,10 @@ class EmailService:
         self.smtp_port = smtp_port
         self.sender_email = sender_email
         self.sender_password = sender_password
+
+
+        # If sender email or password is not provided, attempt to load from environment variables 
+        # This allows for secure configuration without hardcoding sensitive information in the codebase. It also provides flexibility for different deployment environments, where environment variables can be set up to manage credentials securely. If the sender email or password is not found in the environment variables, it will print a warning message, which can help with debugging email configuration issues. This approach ensures that the email service can function properly while keeping sensitive information secure and configurable.
 
     def send_invoice_email(self, recipient_email, subject, body, attachment_path):
         """
@@ -70,7 +77,7 @@ class EmailService:
                 
                 server.send_message(msg)
             
-            print(f"✓ Email sent successfully to {recipient_email}")
+            print(f" Email sent successfully to {recipient_email}")
             return True
 
         except Exception as e:

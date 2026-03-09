@@ -8,8 +8,8 @@ import SmartSearchFilters, { FilterOptions } from './components/SmartSearchFilte
 import InvoiceModal from './components/InvoiceModal';
 import { Employee, EmployeeSummary, Message } from './types';
 
-const API_BASE_URL = 'http://localhost:5000';
-// const API_BASE_URL = 'https://employee-tracker-api-313726293085.us-central1.run.app';
+//const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://dataplatr-emp-perf-api-313726293085.us-central1.run.app/';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -170,9 +170,7 @@ Use the smart search bar above to search employees, apply filters, or ask any qu
               />
             </div>
 
-            <div className="mt-2 text-center text-xs text-slate-400">
-              AI-powered analytics • Internal Use Only
-            </div>
+
           </div>
         </main>
       </div>

@@ -1,9 +1,4 @@
 
-
-
-# trial sow rules and hours 
-
-# extra n 4hrs trial
 # FILE: lyell_individual_analyzer.py
 import pandas as pd
 from datetime import datetime, timedelta, date

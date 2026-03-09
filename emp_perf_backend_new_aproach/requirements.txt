@@ -1,7 +1,10 @@
-Flask==3.0.0
-flask-cors==4.0.0
-google-generativeai==0.3.2
-pandas==2.1.4
-requests==2.31.0
-gunicorn==21.2.0
-python-dotenv==1.0.0
+# requirements.txt
+flask
+flask-cors
+google-generativeai
+pandas
+python-dotenv
+gunicorn
+reportlab  # Add this line for PDF generation
+google-cloud-storage  # If you're using GCS for invoices
+requests
