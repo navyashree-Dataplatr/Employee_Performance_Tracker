@@ -2,10 +2,10 @@
 
 """
 Invoice Generator for Lyell Project Monthly Billing
-"""  # This is a description of the file. It explains that this code generates invoices for the Lyell project.
+""" 
 
-from datetime import date, timedelta  # Import date functions to work with dates
-from typing import Dict, List  # Import typing helpers for better code readability
+from datetime import date, timedelta 
+from typing import Dict, List  
 
 
 class LyellInvoiceGenerator:  # Main class that handles invoice generation
@@ -130,7 +130,7 @@ class LyellInvoiceGenerator:  # Main class that handles invoice generation
             # Human readable invoice period
         }
 
-        print(f"✓ Invoice generated: {invoice_number}")
+        print(f"Invoice generated: {invoice_number}")
         # Print confirmation message
 
         print(f"  Total hours: {totals['total_hours']:.2f}")
@@ -150,7 +150,7 @@ class LyellInvoiceGenerator:  # Main class that handles invoice generation
     
     
     def _calculate_invoice_totals(self, employee_performance: List[Dict]) -> Dict:
-        # Private function to calculate overall totals
+        #  function to calculate overall totals
 
         return {
             'total_hours': sum(emp.get('total_hours_on_lyell', 0) for emp in employee_performance),
@@ -166,7 +166,7 @@ class LyellInvoiceGenerator:  # Main class that handles invoice generation
 
 
     def _generate_employee_breakdown(self, employee_performance: List[Dict]) -> List[Dict]:
-        # Private function to generate detailed billing data for each employee
+        # function to generate detailed billing data for each employee
 
         employee_breakdown = []
         # Create empty list to store employee billing data
@@ -229,7 +229,7 @@ class LyellInvoiceGenerator:  # Main class that handles invoice generation
 
 
     def _generate_category_breakdown(self, employee_performance: List[Dict]) -> List[Dict]:
-        # Private function to calculate totals by work category
+        #  function to calculate totals by work category
 
         category_totals = {}
         # Dictionary to store totals for each category

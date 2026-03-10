@@ -2421,7 +2421,7 @@ def generate_monthly_invoice_trigger():
             month = today.month
             period_desc = f"{today.strftime('%B %Y')}"
         
-        print(f"🚀 Cloud Scheduler triggered invoice generation for {period_desc}")
+        print(f" Cloud Scheduler triggered invoice generation for {period_desc}")
         
         # Generate invoice data
         invoice_data = invoice_generator.generate_monthly_invoice(year, month)
@@ -2442,14 +2442,14 @@ Please find attached the automated monthly invoice for the Lyell project.
         success = email_service.send_invoice_email(recipient, subject, body, pdf_path)
         
         if success:
-            print(f"✅ Monthly invoice automation complete for {period_desc}")
+            print(f" Monthly invoice automation complete for {period_desc}")
             return jsonify({
                 "success": True,
                 "message": f"Invoice generated and sent for {period_desc}",
                 "invoice_number": invoice_data['invoice_number']
             }), 200
         else:
-            print(f"❌ Failed to send automated invoice for {period_desc}")
+            print(f" Failed to send automated invoice for {period_desc}")
             return jsonify({
                 "success": False,
                 "error": "Failed to send email",
@@ -2457,7 +2457,7 @@ Please find attached the automated monthly invoice for the Lyell project.
             }), 500
             
     except Exception as e:
-        print(f"❌ Error in scheduled invoice generation: {e}")
+        print(f" Error in scheduled invoice generation: {e}")
         traceback.print_exc()
         return jsonify({
             "success": False,
@@ -2533,14 +2533,14 @@ Billable Amount: ${invoice_data['total_billable_amount']:,.2f}
         
         scheduler_thread = threading.Thread(target=automated_invoice_scheduler, daemon=True)
         scheduler_thread.start()
-        print("✓ Local scheduler thread started (development only)")
+        print(" Local scheduler thread started (development only)")
     
     print(f" Server starting on: http://localhost:5000")
     print("="*60)
     
     # For production on Cloud Run, use the Cloud Scheduler endpoint
     if ENVIRONMENT == "production":
-        print("✅ Production mode: Use Google Cloud Scheduler to trigger /api/generate-monthly-invoice")
+        print(" Production mode: Use Google Cloud Scheduler to trigger /api/generate-monthly-invoice")
         print("   Schedule: 0 22 L * * (10 PM on last day of month)")
     
     app.run(debug=ENVIRONMENT == "development", host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), use_reloader=False)

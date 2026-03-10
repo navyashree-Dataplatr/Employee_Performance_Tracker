@@ -57,7 +57,7 @@ class LyellIndividualAnalyzer:
             base_processor: Instance of BaseDataProcessor
         """
         self.base = base_processor
-        self.individual_analyzer = None  # Will be set separately if needed
+        self.individual_analyzer = None  
     
     def set_individual_analyzer(self, individual_analyzer):
         """Set reference to IndividualAnalyzer for general metrics"""
@@ -207,7 +207,7 @@ class LyellIndividualAnalyzer:
         if not lyell_data.empty:
             print(f"DEBUG _filter_lyell_data: Final filtered data - {len(lyell_data)} rows, Total hours: {lyell_data['Hours'].sum():.2f}")
         
-        # IMPORTANT FIX: Process each row's tasks individually to get accurate category breakdown
+        # Process each row's tasks individually to get accurate category breakdown
         # Split tasks by newline to handle multiple tasks per row
         expanded_rows = []
         for idx, row in lyell_data.iterrows():
@@ -242,7 +242,7 @@ class LyellIndividualAnalyzer:
             # Reset index
             lyell_data = lyell_data.reset_index(drop=True)
         
-        # Add category for task-level analysis - NOW it's accurate per task
+        # Add category for task-level analysis 
         lyell_data['category'] = lyell_data['Tasks_Completed'].apply(self._extract_category)
         
         print(f"DEBUG _filter_lyell_data: After task expansion - {len(lyell_data)} rows")
@@ -459,7 +459,7 @@ class LyellIndividualAnalyzer:
     def get_lyell_performance_by_date(self, 
                                     target_date: date) -> Dict:
         """
-        🔹 What work was done on the Lyell project on specific date?
+         What work was done on the Lyell project on specific date?
         
         Args:
             target_date: Specific date to analyze
@@ -545,7 +545,7 @@ class LyellIndividualAnalyzer:
                                     year: int,
                                     month: int) -> Dict:
         """
-        🔹 Which employees worked on Lyell in specific month?
+         Which employees worked on Lyell in specific month?
         
         Args:
             year: Year to analyze
@@ -617,7 +617,7 @@ class LyellIndividualAnalyzer:
                                start_date: Optional[date] = None,
                                end_date: Optional[date] = None) -> Dict:
         """
-        🔹 How many hours were spent on specific category for Lyell?
+         How many hours were spent on specific category for Lyell?
         
         Args:
             category: Category to analyze (etl, reporting, testing, development, architect, other)
@@ -732,7 +732,7 @@ class LyellIndividualAnalyzer:
                                       start_date: Optional[date] = None,
                                       end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Show task category–wise breakdown per employee for Lyell
+         Show task category–wise breakdown per employee for Lyell
         
         Args:
             employee_name: Employee name (partial match)
@@ -848,7 +848,7 @@ class LyellIndividualAnalyzer:
                                 start_date: Optional[date] = None,
                                 end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Identify potential SOW violations for Lyell
+         Identify potential SOW violations for Lyell
         
         Args:
             start_date: Start date for analysis
@@ -970,7 +970,7 @@ class LyellIndividualAnalyzer:
                           start_date: Optional[date] = None,
                           end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Which employees logged more than X hours in a single day for Lyell?
+         Which employees logged more than X hours in a single day for Lyell?
         
         Note: This is OVERTIME detection (8+ hours), NOT extra hours (which is 4+ for ETL/Reporting)
         
@@ -1090,7 +1090,7 @@ class LyellIndividualAnalyzer:
                         start_date: Optional[date] = None,
                         end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Compare two employees' performance on Lyell
+         Compare two employees' performance on Lyell
         
         Args:
             employee1_name: First employee name
@@ -1203,7 +1203,7 @@ class LyellIndividualAnalyzer:
                            start_date: Optional[date] = None,
                            end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Who are the top contributors for the Lyell project?
+         Who are the top contributors for the Lyell project?
         
         Args:
             top_n: Number of top contributors to return
@@ -1390,7 +1390,7 @@ class LyellIndividualAnalyzer:
                                   start_date: Optional[date] = None,
                                   end_date: Optional[date] = None) -> Dict:
         """
-        🔹 Identify employees handling multiple projects
+         Identify employees handling multiple projects
         
         Args:
             start_date: Start date for analysis
